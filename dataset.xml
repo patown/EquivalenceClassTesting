@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+  <actions>
+	<!--	
+WEAK_NORNAMAL("0"),
+STRONG_NORNAMAL("1"),
+WEAK_ROBUST("2"),
+STRONG_ROBUST("3");-->
+    <action name="mthod1" class="com.class" comb="0">
+        <parameter name="id" type="String">
+          <item type="vec">a</item>
+          <item type="vec">b</item>
+          <item type="iec">~a</item>
+          <item type="iec">~b</item>
+        </parameter>
+        <parameter name="isActive" type="int">
+          <item type="vec">0</item>
+          <item type="vec">1</item>
+          <item type="iec">~0</item>
+          <item type="iec">~1</item>
+        </parameter>
+       </action>
+    <action name="mthod2" class="com.class" comb="1">
+        <parameter name="id" type="String">
+          <item type="vec">a</item>
+          <item type="vec">b</item>
+          <item type="iec">~a</item>
+          <item type="iec">~b</item>
+        </parameter>
+        <parameter name="isActive" type="int">
+          <item type="vec">0</item>
+          <item type="vec">1</item>
+          <item type="iec">~0</item>
+          <item type="iec">~1</item>
+        </parameter>
+       </action>
+    <action name="mthod3" class="com.class" comb="2">
+        <parameter name="id" type="String">
+          <item type="vec">a</item>
+          <item type="vec">b</item>
+          <item type="iec">~a</item>
+          <item type="iec">~b</item>
+        </parameter>
+        <parameter name="isActive" type="int">
+          <item type="vec">0</item>
+          <item type="vec">1</item>
+          <item type="iec">~0</item>
+          <item type="iec">~1</item>
+        </parameter>
+       </action>
+    <action name="mthod3" class="com.class" comb="3">
+        <parameter name="id" type="String">
+          <item type="vec">a</item>
+          <item type="vec">b</item>
+          <item type="iec">~a</item>
+          <item type="iec">~b</item>
+        </parameter>
+        <parameter name="isActive" type="int">
+          <item type="vec">0</item>
+          <item type="vec">1</item>
+          <item type="iec">~0</item>
+          <item type="iec">~1</item>
+        </parameter>
+       </action>
+  </actions>

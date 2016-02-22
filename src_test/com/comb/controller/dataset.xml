@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+  <actions>
+    <action name="mthodName" class="com.class">
+        <paramter name="id" type="String">
+          <item type="vec">a</item>
+          <item type="vec">123456789</item>
+          <item type="iec"></item>
+          <item type="iec">null</item>
+        </paramter>
+        <paramter name="isActive" type="int">
+          <item type="vec">0</item>
+          <item type="vec">1</item>
+          <item type="iec">-1</item>
+          <item type="iec">2</item>
+        </paramter>
+       </action>
+  </actions>
