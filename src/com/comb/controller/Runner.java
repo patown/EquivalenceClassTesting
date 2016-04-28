@@ -3,7 +3,9 @@ package com.comb.controller;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import com.comb.dataset.InputFileDigester;
 import com.comb.dataset.InputFileFinder;
@@ -11,6 +13,9 @@ import com.comb.dataset.beans.ActionBean;
 import com.comb.dataset.beans.CombDataSetBean;
 import com.comb.dataset.beans.ItemBean;
 import com.comb.dataset.beans.ParaBean;
+import com.testsuite.TestCase;
+import com.testsuite.TestStep;
+import com.testsuite.TestSuite;
 import com.util.datacomb.Comb;
 
 
@@ -20,6 +25,7 @@ public class Runner {
     private List<ActionBean>  actionBeans = new ArrayList<ActionBean>();
     private List<CombDataSetBean> combDataSets= new ArrayList<CombDataSetBean>();
     private String file;
+    private TestSuite testSuite= new TestSuite();
     public Runner(String file){
     	this.file = file;
     	initializeDataSet(file);
@@ -30,6 +36,7 @@ public class Runner {
 		+ " WEAK_ROBUST(\"2\"),"
 		+ "STRONG_ROBUST(\"3\")");
 		System.out.println("********************************");
+		run();
     }
     
     private  void initializeDataSet(String file) {
@@ -71,17 +78,56 @@ public class Runner {
     }
     	
     }	
-    public void run(){
-    	for(CombDataSetBean dataSet: combDataSets){
-    		System.out.println("********************************");
-     		System.out.println("action = '"+dataSet.getName()+"' combtype='"+dataSet.getCombType()+"'");
-    		System.out.println("VEC::"+dataSet.getListVEC());
-    		System.out.println("IEC::"+dataSet.getAllIECList());
-     		System.out.println("****************");
-     		System.out.println("***CombResult***");
-     		System.out.println("****************");
-     		System.out.println(Comb.genResultSet(dataSet).toString());
-    		System.out.println("********************************");
-    	}
+    public List<CombDataSetBean> getDataSet(){
+    	return  combDataSets;
     }
+    public void run(){
+    	List<TestCase> testCases=new ArrayList<>();
+    	for(CombDataSetBean dataSet: combDataSets){
+//    		System.out.println("********************************");
+//     		System.out.println("action = '"+dataSet.getName()+"' combtype='"+dataSet.getCombType()+"'");
+//    		System.out.println("VEC::"+dataSet.getListVEC());
+//    		System.out.println("IEC::"+dataSet.getAllIECList());
+//     		System.out.println("****************");
+//     		System.out.println("***CombResult***");
+//     		System.out.println("****************");
+     		//System.out.println(Comb.genResultSet(dataSet).toString());
+     		
+     		//exec(Comb.genResultSet(dataSet),dataSet.getName()+"."+dataSet.getCombType());
+     		testCases.addAll(setTestCases(Comb.genResultSet(dataSet),dataSet.getName(),dataSet.getCombType().toString()));
+     		System.out.println("********************************");
+  	}
+    	testSuite.setTestCases(testCases);
+    }
+
+    public TestSuite getTestSuite(){
+    	return testSuite;
+    }
+    private void exec(Set<List<String>> datas,String prefix){
+    	int num=0;
+    	 for (Iterator iter = datas.iterator(); iter.hasNext();) {
+    		 List<String> list =(List<String>) iter.next();
+    		  System.out.println(prefix+"."+num+"::"+list.toString());
+    		  num++;
+    		 }
+
+    }
+    private  List<TestCase> setTestCases(Set<List<String>> datas,String command,String prefix){
+        List<TestCase> testCases= new ArrayList<>();
+    	int num=0;
+    	 for (Iterator iter = datas.iterator(); iter.hasNext();) {
+    		 List<String> list =(List<String>) iter.next();
+    		 TestCase testCase=new TestCase();
+    		 TestStep testStep=new TestStep();
+    		 testStep.setCommand(command);
+    		 testStep.setStepID(1);
+    		 testStep.setInputData(list.toString());
+    		 testCase.addTestStep(testStep);
+    		 testCase.setCaseName(command+"."+prefix+"."+num);
+    		 testCases.add(testCase);
+    		  num++;
+    		 }
+    	 return testCases;
+    }
+    
 	}
