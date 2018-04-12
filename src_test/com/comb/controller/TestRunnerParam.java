@@ -1,5 +1,7 @@
 package com.comb.controller;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.junit.Test;
@@ -20,18 +22,26 @@ public class TestRunnerParam {
 		this.testCase=testCase;
 	}
 	@Parameters(name="{0}")
-	public static Object[][] getTestCases(){
+	public static Collection<Object[]> getTestCases(){
+	//public static Object[][] getTestCases(){
 		Runner runner=new Runner("dataset.xml");
 		TestSuite suite=runner.getTestSuite();
 		List<TestCase> cases=suite.getTestCases();
 		Integer num=cases.size();
-		Object [][] test= new Object[num][2];
+//		Object [][] test= new Object[num][2];
+//		for(int i=0;i<num;i++){
+//			test[i][0]=cases.get(i).getCaseName();
+//			test[i][1]=cases.get(i);
+//		}
+//		return test;
+	    Collection<Object[]> datas = new ArrayList<>();
 		for(int i=0;i<num;i++){
-			test[i][0]=cases.get(i).getCaseName();
-			test[i][1]=cases.get(i);
-		}
-		return test;
-		
+		Object [] test= new Object[2];
+		test[0]=cases.get(i).getCaseName();
+		test[1]=cases.get(i);
+		datas.add(test);
+	}
+		return datas;
 	}
 	@Test
 	public void runTest(){
